@@ -10,6 +10,13 @@ public class LevelManagerTest : MonoBehaviour {
     private int totalTiles;
     private Transform[] tileTransforms;
 
+    public enum LevelState
+    {
+        none = 0,
+        TOP = 1,
+        SIDE = 2
+    }
+
     private void Awake()
     {
         totalTiles = tiles.Length;
