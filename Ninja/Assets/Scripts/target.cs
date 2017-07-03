@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Test
+namespace Ninja
 {
     public class target : MonoBehaviour
     {

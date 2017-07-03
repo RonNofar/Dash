@@ -16,22 +16,28 @@ public class TestPlayer : MonoBehaviour {
     private GameObject targetPrefab;
     [SerializeField]
     private Vector3 targetLocalSpawnPosition = new Vector3(0, 1f, 0);
+    [SerializeField]
+    private float rampBoost = 0.1f;
 
     private new Transform transform;
     private Vector3[] positionQue;
     private int queLength = 0;
     private bool isMoving = false;
     private bool isStartMoving = false;
+    private bool isRamp = false;
 
     private GameObject[] targetPool;
 
     private Coroutine currCoroutine;
 
-	// Use this for initialization
-	void Start () {
-        SetMaxQueLength(maxQueLength);
+    private void Awake()
+    {
         transform = GetComponent<Transform>();
-        Debug.Log(targetPrefab.transform.rotation);
+    }
+
+    void Start () {
+        SetMaxQueLength(maxQueLength);
+        //Debug.Log(targetPrefab.transform.rotation);
 	}
 
     // Update is called once per frame
@@ -114,12 +120,20 @@ public class TestPlayer : MonoBehaviour {
             //Debug.Log("ToLerp: " + toLerp);
 
             float distance = Vector3.Distance(orgPos, toLerp);
-            totalTime = distance / lerpVelocity;
 
+            totalTime = distance / lerpVelocity;
             timeRatio = (Time.time - startTime) / totalTime;
             if (timeRatio > 1) timeRatio = 1;
 
+            if (isRamp)
+            {
+                //transform.Translate(Vector3.up * rampBoost + -Physics.gravity);
+                toLerpArray[i] = new Vector3(toLerp.x, toLerp.y + rampBoost, toLerp.z);
+                toLerp = toLerpArray[i];
+                Debug.Log("In sequence and RAMP");
+            }
             transform.position = Vector3.Lerp(orgPos, toLerp, timeRatio);
+            
 
             if (timeRatio == 1)
             { // Clean up here
@@ -161,6 +175,30 @@ public class TestPlayer : MonoBehaviour {
             }
 
             Debug.Log("Collision");
+        }
+        else if (col.transform.tag == "Ramp")
+        {
+            Debug.Log("RAMP");
+            //transform.Translate(Vector3.up * rampBoost);
+            //Vector3 pos = transform.position;
+            //transform.position = new Vector3(pos.x, pos.y + rampBoost, pos.z);
+            isRamp = true;
+        }
+    }/*
+    private void OnCollisionStay(Collision col)
+    {
+        if (col.transform.tag == "Ramp")
+        {
+            Debug.Log("RAMP");
+            transform.Translate(Vector3.up * rampBoost);
+        }
+    }*/
+    private void OnCollisionExit(Collision col)
+    {
+        if (col.transform.tag == "Ramp")
+        {
+            Debug.Log("RAMP UOT");
+            isRamp = false;
         }
     }
 

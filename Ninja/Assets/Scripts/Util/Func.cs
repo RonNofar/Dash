@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Test.Util
+namespace Ninja.Util
 {
     public class Func : MonoBehaviour
     {

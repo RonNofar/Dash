@@ -15,6 +15,10 @@ public class CameraTest : MonoBehaviour {
     private new Transform transform;
     private float startTime;
 
+    [Header("DEBUG")]
+    [SerializeField]
+    private bool __DEBUG__ = false;
+
     void Start()
     {
         cam = Camera.main;
@@ -28,9 +32,15 @@ public class CameraTest : MonoBehaviour {
     void Update()
     {
         if (GeometryUtility.TestPlanesAABB(planes, anObjCollider.bounds))
-            Debug.Log(anObject.name + " has been detected!");
+        {
+            if (__DEBUG__) Debug.Log(anObject.name + " has been detected!");
+
+        }
         else
-            Debug.Log("Nothing has been detected");
+        {
+            if (__DEBUG__) Debug.Log("Nothing has been detected");
+
+        }
 
         if (Time.time > startTime + waitTime)
             transform.Translate(Vector3.forward * movementSpeed, Space.World);
