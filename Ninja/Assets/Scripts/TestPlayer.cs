@@ -105,7 +105,7 @@ public class TestPlayer : MonoBehaviour {
 
 
 
-    IEnumerator StartLerpSequence(Vector3[] toLerpArray, float totalTime)
+    IEnumerator StartLerpSequence(Vector3[] toLerpArray, float? totalTime)
     {
         isMoving = true;
         float startTime = Time.time;
@@ -122,7 +122,7 @@ public class TestPlayer : MonoBehaviour {
             float distance = Vector3.Distance(orgPos, toLerp);
 
             totalTime = distance / lerpVelocity;
-            timeRatio = (Time.time - startTime) / totalTime;
+            timeRatio = (Time.time - startTime) / (float)totalTime;
             if (timeRatio > 1) timeRatio = 1;
 
             if (isRamp)
