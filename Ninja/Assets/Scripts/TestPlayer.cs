@@ -1,8 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TestPlayer : MonoBehaviour {
+
+    public enum Upgrade
+    {
+        NULL = -1,
+        TIME = 0,     // initial time
+        VELOCITY = 1, // travel velocity 
+        HEALTH = 2,   // time pickup multiplier
+        COIN = 3      // coin pickup multiplier
+    }
 
     [SerializeField]
     private float rayRange = 100f;
@@ -19,6 +29,10 @@ public class TestPlayer : MonoBehaviour {
     [SerializeField]
     private float rampBoost = 0.1f;
 
+    [Header("PickUps")]
+    [SerializeField] TimeManager timeManager;
+    [SerializeField] Text coinText;
+
     private new Transform transform;
     private Vector3[] positionQue;
     private int queLength = 0;
@@ -30,6 +44,10 @@ public class TestPlayer : MonoBehaviour {
 
     private Coroutine currCoroutine;
 
+    private int coins = 0;
+
+    public Dictionary<Upgrade, int> Upgrades = new Dictionary<Upgrade, int>();
+
     private void Awake()
     {
         transform = GetComponent<Transform>();
@@ -38,14 +56,17 @@ public class TestPlayer : MonoBehaviour {
     void Start () {
         SetMaxQueLength(maxQueLength);
         //Debug.Log(targetPrefab.transform.rotation);
-	}
+
+        coinText.text = "" + coins;
+    }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            onClick();
+            if (!GameMaster.Instance.isPaused)
+                onClick();
         }
         if (!isMoving && isStartMoving)
         {
@@ -209,6 +230,22 @@ public class TestPlayer : MonoBehaviour {
         // Oh no, don't lose references (transfer them here), I'll finish this later >.<
     }
 
+    public void OnPickUp(PickUp.Type type, float amount)
+    {
+        switch(type)
+        {
+            case PickUp.Type.NULL:
+                Debug.Log("ERROR: PickUpType is NULL");
+                break;
+            case PickUp.Type.HEALTH:
+                timeManager.AddTime(amount);
+                break;
+            case PickUp.Type.COIN:
+                coins += (int)amount;
+                coinText.text = "" + coins;
+                break;
+        }
+    }
 }
 
 /*

@@ -12,6 +12,12 @@ namespace Ninja.Util
             yield return new WaitForSeconds(secs);
             action.Invoke();
         }
+
+        public static IEnumerator WaitAndRunActionInRealTime(float secs, UnityAction action)
+        { // wait for secs  in real time (ignores timescale)
+            yield return new WaitForSecondsRealtime(secs);
+            action.Invoke();
+        }
     }
 
     [System.Serializable]
