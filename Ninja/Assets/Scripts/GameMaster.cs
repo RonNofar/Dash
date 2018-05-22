@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour {
 
@@ -19,6 +20,11 @@ public class GameMaster : MonoBehaviour {
         }
         else
         { _instance = this; }
+    }
+
+    public static void ResetGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Pause(bool pause)

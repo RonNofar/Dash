@@ -24,7 +24,7 @@ public class CameraTest : MonoBehaviour {
         cam = Camera.main;
         planes = GeometryUtility.CalculateFrustumPlanes(cam);
         anObjCollider = anObject.GetComponent<Collider>();
-        Debug.Log(anObjCollider.bounds);
+        //Debug.Log(anObjCollider.bounds);
 
         transform = GetComponent<Transform>();
         startTime = Time.time;

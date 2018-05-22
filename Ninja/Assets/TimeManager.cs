@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour {
 
+    static protected TimeManager _instance;
+    static public TimeManager Instance { get { return _instance; } }
+
     [SerializeField] GamePanelHandler gamePanel;
     [SerializeField] float initialTime = 1f;
 
     private float startTime;
     private float currentTime;
 
-    private float timeLeft;
+    [HideInInspector]
+    public float timeLeft;
 
     private bool isDone;
+
+    private void Awake()
+    {
+        if (_instance != null)
+        {
+            Debug.LogWarning(gameObject.name+" is already in play. Deleting new!", gameObject);
+            Destroy(gameObject);
+        }
+        else
+        { _instance = this; }
+    }
 
     private void Start()
     {
@@ -49,7 +64,9 @@ public class TimeManager : MonoBehaviour {
 
             //if (!isDone) Debug.Log(timeLeft);
 
-            gamePanel.SetTimeText("" + Mathf.RoundToInt(timeLeft * 1000f));
+            //gamePanel.SetTimeText("" + Mathf.RoundToInt(timeLeft * 1000f));
         }
     }
+
+
 }

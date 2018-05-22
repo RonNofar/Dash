@@ -5,14 +5,8 @@ using UnityEngine.UI;
 
 public class TestPlayer : MonoBehaviour {
 
-    public enum Upgrade
-    {
-        NULL = -1,
-        TIME = 0,     // initial time
-        VELOCITY = 1, // travel velocity 
-        HEALTH = 2,   // time pickup multiplier
-        COIN = 3      // coin pickup multiplier
-    }
+    static protected TestPlayer _instance;
+    static public TestPlayer Instance { get { return _instance; } }
 
     [SerializeField]
     private float rayRange = 100f;
@@ -44,17 +38,38 @@ public class TestPlayer : MonoBehaviour {
 
     private Coroutine currCoroutine;
 
-    private int coins = 0;
+    [HideInInspector]
+    public int coins = 0;
 
-    public Dictionary<Upgrade, int> Upgrades = new Dictionary<Upgrade, int>();
+    public Dictionary<Upgrade.Type, int> upgrades = new Dictionary<Upgrade.Type, int>();
 
+    private float velocityUpgrade;    // velocity after calculations;
+    private int maxQueLengthUgrade; // the max que length after initializing upgrades
+
+
+    #region Unity Functions
     private void Awake()
     {
+        if (_instance != null)
+        {
+            Debug.LogWarning("Player is already in play. Deleting new!", gameObject);
+            Destroy(gameObject);
+        }
+        else
+        { _instance = this; }
+
+
         transform = GetComponent<Transform>();
     }
 
     void Start () {
-        SetMaxQueLength(maxQueLength);
+        InitializeUpgrades();
+
+        SetMaxQueLength(
+            Upgrade.CalculateQue(
+                maxQueLength, 
+                upgrades[Upgrade.Type.QUE]));
+
         //Debug.Log(targetPrefab.transform.rotation);
 
         coinText.text = "" + coins;
@@ -74,14 +89,16 @@ public class TestPlayer : MonoBehaviour {
             currCoroutine = StartCoroutine(StartLerpSequence(positionQue, lerpLength));
         }
     }
+    #endregion
 
+    #region Movement Functions
     void onClick()
     {
         //Debug.Log("In onClick");
-        if (queLength < maxQueLength)
+        if (queLength < maxQueLengthUgrade)
         {
             //Debug.Log("queLength < maxLength");
-            for (int i = 0; i < maxQueLength; ++i)
+            for (int i = 0; i < maxQueLengthUgrade; ++i)
             {
                 //Debug.Log("l"+i+" queLEngth: "+queLength);
 
@@ -92,9 +109,9 @@ public class TestPlayer : MonoBehaviour {
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(ray, out hit, rayRange))
                     {
-                        if (hit.transform.tag == "Ground")
+                        if (hit.transform.tag == "Ground" || hit.transform.tag == "Ramp")
                         {
-                            Debug.Log(hit.point);
+                            //Debug.Log(hit.point);
                             Vector3 hitXZ = new Vector3(
                                 hit.point.x,
                                 transform.position.y,
@@ -109,6 +126,7 @@ public class TestPlayer : MonoBehaviour {
                                     targetPrefab, 
                                     hit.point + targetLocalSpawnPosition, 
                                     targetPrefab.transform.rotation);
+                                //targetPool[i].GetComponent<Ninja.target>().totalTime = 
                             } else
                             {
                                 targetPool[i].SetActive(true);
@@ -142,7 +160,7 @@ public class TestPlayer : MonoBehaviour {
 
             float distance = Vector3.Distance(orgPos, toLerp);
 
-            totalTime = distance / lerpVelocity;
+            totalTime = distance / velocityUpgrade;
             timeRatio = (Time.time - startTime) / (float)totalTime;
             if (timeRatio > 1) timeRatio = 1;
 
@@ -169,7 +187,7 @@ public class TestPlayer : MonoBehaviour {
                 }
                 else
                 {
-                    positionQue = new Vector3[maxQueLength];
+                    positionQue = new Vector3[maxQueLengthUgrade];
                     queLength = 0;
                     isMoving = false;
                     Debug.Log("Broke");
@@ -186,7 +204,7 @@ public class TestPlayer : MonoBehaviour {
         if (col.transform.tag == "Obstacle")
         {
             StopCoroutine(currCoroutine);
-            positionQue = new Vector3[maxQueLength];
+            positionQue = new Vector3[maxQueLengthUgrade];
             queLength = 0;
             isMoving = false;
             for (int i = 0; i < targetPool.Length; ++i)
@@ -225,11 +243,14 @@ public class TestPlayer : MonoBehaviour {
 
     void SetMaxQueLength(int length)
     { // This method is used to handle a change in max que length while running
+        maxQueLengthUgrade = length;
         positionQue = new Vector3[length];
         targetPool = new GameObject[length];
         // Oh no, don't lose references (transfer them here), I'll finish this later >.<
     }
+    #endregion
 
+    #region Other Functions
     public void OnPickUp(PickUp.Type type, float amount)
     {
         switch(type)
@@ -238,14 +259,71 @@ public class TestPlayer : MonoBehaviour {
                 Debug.Log("ERROR: PickUpType is NULL");
                 break;
             case PickUp.Type.HEALTH:
-                timeManager.AddTime(amount);
+                timeManager.AddTime(
+                    Upgrade.CalculateHealth(
+                        amount, 
+                        upgrades[Upgrade.Type.HEALTH]));
                 break;
             case PickUp.Type.COIN:
-                coins += (int)amount;
-                coinText.text = "" + coins;
+                coins += Upgrade.CalculateCoin(
+                    (int)amount,
+                    upgrades[Upgrade.Type.COIN]);
+                //coinText.text = "" + coins;
                 break;
         }
     }
+
+    public void InitializeUpgrades()
+    {
+        SaveData savedData = SaveLoad.Load();
+        /*SaveData.current = new SaveData();
+        SaveLoad.savedData = SaveData.current;*/
+        AddOrChangeDictionaryValueByKey(Upgrade.Type.VELOCITY, savedData);
+        AddOrChangeDictionaryValueByKey(Upgrade.Type.HEALTH  , savedData);
+        AddOrChangeDictionaryValueByKey(Upgrade.Type.COIN    , savedData);
+        AddOrChangeDictionaryValueByKey(Upgrade.Type.TIME    , savedData);
+        AddOrChangeDictionaryValueByKey(Upgrade.Type.QUE     , savedData);
+
+        velocityUpgrade =
+            Upgrade.CalculateVelocity(
+                    lerpVelocity,
+                    upgrades[Upgrade.Type.VELOCITY]);
+
+        timeManager.AddTime(
+            Upgrade.CalculateTime(
+                upgrades[Upgrade.Type.TIME]));
+
+        SetMaxQueLength(
+            Upgrade.CalculateQue(
+                maxQueLength,
+                upgrades[Upgrade.Type.QUE]));
+
+        /*upgrades.Add(
+            Upgrade.Type.VELOCITY, 
+            savedData.upgrades[Upgrade.Type.VELOCITY]);
+        upgrades.Add(
+            Upgrade.Type.HEALTH,
+            savedData.upgrades[Upgrade.Type.HEALTH]);
+        upgrades.Add(
+            Upgrade.Type.COIN,
+            savedData.upgrades[Upgrade.Type.COIN]);
+        upgrades.Add(
+            Upgrade.Type.TIME,
+            savedData.upgrades[Upgrade.Type.TIME]);*/
+    }
+
+    // ADD ratio to this function as input? or elsewhere...
+    void AddOrChangeDictionaryValueByKey(Upgrade.Type key, SaveData savedData = null)
+    { // adds key / value if does not exist, updates value otherwise 
+        if (savedData == null)
+            savedData = SaveLoad.Load();
+
+        if (upgrades.ContainsKey(key))
+            upgrades[key] = savedData.upgrades[key];
+        else
+            upgrades.Add(key, savedData.upgrades[key]);
+    }
+    #endregion
 }
 
 /*

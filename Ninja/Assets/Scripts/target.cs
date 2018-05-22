@@ -9,8 +9,7 @@ namespace Ninja
 
         [SerializeField]
         private Util.FloatRange scaleRange; // min and max
-        [SerializeField]
-        private float totalTime; // total time it takes to scale and transform from min to max (or min to max back to min)
+        public float totalTime; // total time it takes to scale and transform from min to max (or min to max back to min)
         [SerializeField]
         private Util.FloatRange heightRange; // min and max (relative)
         [SerializeField]

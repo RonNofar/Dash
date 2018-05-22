@@ -1,0 +1,160 @@
+Mono path[0] = 'C:/Users/ronno/Dash/Ninja/Builds/Android-171228_Data/Managed'
+Mono config path = 'C:/Users/ronno/Dash/Ninja/Builds/Android-171228_Data/Mono/etc'
+PlayerConnection initialized from C:/Users/ronno/Dash/Ninja/Builds/Android-171228_Data (debug = 0)
+PlayerConnection initialized network socket : 0.0.0.0 55470
+Multi-casting "[IP] 192.168.254.19 [Port] 55470 [Flags] 3 [Guid] 1651787516 [EditorId] 2156311775 [Version] 1048832 [Id] WindowsPlayer(LAPTOP-6BLGNMS8) [Debug] 0" to [225.0.0.222:54997]...
+Waiting for connection from host on [0.0.0.0:55470]...
+PlayerConnection accepted from [192.168.254.19] handle:0x3a8
+Started listening to [0.0.0.0:55470]
+PlayerConnection already initialized - listening to [0.0.0.0:55470]
+Player data archive not found at `C:/Users/ronno/Dash/Ninja/Builds/Android-171228_Data/data.unity3d`, using local filesystem
+Initialize engine version: 2017.1.0f3 (472613c02cf7)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: AMD Radeon(TM) R6 Graphics (ID=0x9874)
+    Vendor:   ATI
+    VRAM:     2291 MB
+    Driver:   15.201.1101.0
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\ronno\Dash\Ninja\Builds\Android-171228_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\ronno\Dash\Ninja\Builds\Android-171228_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\ronno\Dash\Ninja\Builds\Android-171228_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\ronno\Dash\Ninja\Builds\Android-171228_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\ronno\Dash\Ninja\Builds\Android-171228_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\ronno\Dash\Ninja\Builds\Android-171228_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\ronno\Dash\Ninja\Builds\Android-171228_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\ronno\Dash\Ninja\Builds\Android-171228_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\ronno\Dash\Ninja\Builds\Android-171228_Data\Managed\UnityEngine.Timeline.dll (this message is harmless)
+Loading C:\Users\ronno\Dash\Ninja\Builds\Android-171228_Data\Managed\UnityEngine.Timeline.dll into Unity Child Domain
+Platform assembly: C:\Users\ronno\Dash\Ninja\Builds\Android-171228_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\ronno\Dash\Ninja\Builds\Android-171228_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.309 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 263.054162 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 2dac -> priority: 1 
+  Thread -> id: 2164 -> priority: 1 
+The referenced script on this Behaviour is missing!
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Mono/MonoBehaviour.cpp Line: 1515)
+
+The referenced script on this Behaviour (Game Object 'UnityRecompiler') is missing!
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Mono/MonoBehaviour.cpp Line: 1758)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.478764 ms
+System memory in use before: 20.7 MB.
+System memory in use after: 20.7 MB.
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 1021.
+Total: 0.850946 ms (FindLiveObjects: 0.124820 ms CreateObjectMapping: 0.044456 ms MarkObjects: 0.648611 ms  DeleteObjects: 0.030777 ms)
+
+Center: (0.0, 0.0, 0.0), Extents: (0.5, 0.5, 0.5)
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+CameraTest:Start() (at C:\Users\ronno\Dash\Ninja\Assets\Scripts\CameraTest.cs:27)
+ 
+(Filename: C:/Users/ronno/Dash/Ninja/Assets/Scripts/CameraTest.cs Line: 27)
+
+(6.4, -1.5, -0.8)
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+TestPlayer:onClick() (at C:\Users\ronno\Dash\Ninja\Assets\Scripts\TestPlayer.cs:110)
+TestPlayer:Update() (at C:\Users\ronno\Dash\Ninja\Assets\Scripts\TestPlayer.cs:82)
+ 
+(Filename: C:/Users/ronno/Dash/Ninja/Assets/Scripts/TestPlayer.cs Line: 110)
+
+Broke
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+<StartLerpSequence>c__Iterator0:MoveNext() (at C:\Users\ronno\Dash\Ninja\Assets\Scripts\TestPlayer.cs:188)
+UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr) (at C:\buildslave\unity\build\Runtime\Export\Coroutines.cs:17)
+ 
+(Filename: C:/Users/ronno/Dash/Ninja/Assets/Scripts/TestPlayer.cs Line: 188)
+
+(4.8, -1.5, -10.9)
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+TestPlayer:onClick() (at C:\Users\ronno\Dash\Ninja\Assets\Scripts\TestPlayer.cs:110)
+TestPlayer:Update() (at C:\Users\ronno\Dash\Ninja\Assets\Scripts\TestPlayer.cs:82)
+ 
+(Filename: C:/Users/ronno/Dash/Ninja/Assets/Scripts/TestPlayer.cs Line: 110)
+
+Broke
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+<StartLerpSequence>c__Iterator0:MoveNext() (at C:\Users\ronno\Dash\Ninja\Assets\Scripts\TestPlayer.cs:188)
+UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr) (at C:\buildslave\unity\build\Runtime\Export\Coroutines.cs:17)
+ 
+(Filename: C:/Users/ronno/Dash/Ninja/Assets/Scripts/TestPlayer.cs Line: 188)
+
+(-4.3, -1.5, -2.4)
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+TestPlayer:onClick() (at C:\Users\ronno\Dash\Ninja\Assets\Scripts\TestPlayer.cs:110)
+TestPlayer:Update() (at C:\Users\ronno\Dash\Ninja\Assets\Scripts\TestPlayer.cs:82)
+ 
+(Filename: C:/Users/ronno/Dash/Ninja/Assets/Scripts/TestPlayer.cs Line: 110)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Mono/MonoBehaviour.cpp Line: 1515)
+
+The referenced script on this Behaviour (Game Object 'UnityRecompiler') is missing!
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Mono/MonoBehaviour.cpp Line: 1758)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 6.092274 ms
+System memory in use before: 22.4 MB.
+System memory in use after: 22.4 MB.
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 1026.
+Total: 1.057840 ms (FindLiveObjects: 0.193785 ms CreateObjectMapping: 0.046736 ms MarkObjects: 0.780841 ms  DeleteObjects: 0.031917 ms)
+
+Center: (0.0, 0.0, 0.0), Extents: (0.5, 0.5, 0.5)
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+CameraTest:Start() (at C:\Users\ronno\Dash\Ninja\Assets\Scripts\CameraTest.cs:27)
+ 
+(Filename: C:/Users/ronno/Dash/Ninja/Assets/Scripts/CameraTest.cs Line: 27)
+
+Parent of RectTransform is being set with parent property. Consider using the SetParent method instead, with the worldPositionStays argument set to false. This will retain local orientation and scale rather than world orientation and scale, which can prevent common UI scaling issues.
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object, Object)
+UnityEngine.Debug:LogWarning(Object, Object)
+UnityEngine.Transform:set_parent(Transform) (at C:\buildslave\unity\build\artifacts\generated\common\runtime\TransformBindings.gen.cs:153)
+ListController:Start() (at C:\Users\ronno\Dash\Ninja\Assets\ListController.cs:33)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/TransformBindings.gen.cs Line: 153)
+
+Parent of RectTransform is being set with parent property. Consider using the SetParent method instead, with the worldPositionStays argument set to false. This will retain local orientation and scale rather than world orientation and scale, which can prevent common UI scaling issues.
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object, Object)
+UnityEngine.Debug:LogWarning(Object, Object)
+UnityEngine.Transform:set_parent(Transform) (at C:\buildslave\unity\build\artifacts\generated\common\runtime\TransformBindings.gen.cs:153)
+ListController:Start() (at C:\Users\ronno\Dash\Ninja\Assets\ListController.cs:33)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/TransformBindings.gen.cs Line: 153)
+
+Waiting for finish
